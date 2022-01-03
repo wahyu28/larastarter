@@ -27,7 +27,7 @@
             </div>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-toggle="dropdown">
-                    <span class="avatar avatar-sm" style="background-image: url({{ asset('backend/img/avatar/avatar-1.png') }})"></span>
+                    <span class="avatar avatar-sm" style="background-image: url({{ Auth::user()->getFirstMediaUrl('avatar') }})"></span>
                     <div class="d-none d-xl-block pl-2">
                         <div>{{ Auth::user()->name }}</div>
                         <div class="mt-1 small text-muted">
@@ -36,8 +36,9 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                    <a href="#" class="dropdown-item">Profil dan Akun</a>
-                    <a href="#" class="dropdown-item">Pengaturan <span class="text-danger">(Admin)</span></a>
+                    <a href="{{ route('app.profile.index') }}" class="dropdown-item">Profil dan Akun</a>
+                    <a href="{{ route('app.profile.password.change') }}" class="dropdown-item">Change Password</span></a>
+                    <a href="#" class="dropdown-item">Pengaturan</a>
                     <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-logout">Keluar</a>
                 </div>
             </div>

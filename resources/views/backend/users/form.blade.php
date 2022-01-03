@@ -23,18 +23,8 @@
                         Tambah Donasi
                     </a>
                 </span> --}}
-                <a href="{{ route('app.users.index') }}" class="btn btn-primary d-none d-sm-inline-block">
-                    <!-- Download SVG icon from http://tabler-icons.io/i/report-analytics -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-                        stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
-                        <rect x="9" y="3" width="6" height="4" rx="2" />
-                        <path d="M9 17v-5" />
-                        <path d="M12 17v-1" />
-                        <path d="M15 17v-3" />
-                    </svg>
+                <a href="{{ route('app.users.index') }}" class="btn btn-danger d-none d-sm-inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20 6a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-11l-5 -5a1.5 1.5 0 0 1 0 -2l5 -5Z" /><path d="M12 10l4 4m0 -4l-4 4" /></svg>
                     Back to List
                 </a>
                 <a href="#" class="btn btn-primary d-sm-none btn-icon" data-toggle="modal" data-target="#modal-report"
@@ -69,7 +59,7 @@
                                 <div class="col">
                                     <input type="text" name="name" id="name"
                                         class="form-control @error('name') is-invalid @enderror"
-                                        placeholder="Enter Name" value="{{ $user->name ?? old('name') }}" autofocus>
+                                        placeholder="Enter Name" value="{{ $user->name ?? old('name') }}" autofocus {{ !isset($user) ? 'required' : '' }}>
                                     @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -93,7 +83,7 @@
                                 <div class="col">
                                     <input type="password" name="password" id="password"
                                         class="form-control @error('password') is-invalid @enderror"
-                                        placeholder="********">
+                                        placeholder="********" {{ !isset($user) ? 'required' : '' }}>
                                     @error('password')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -105,7 +95,7 @@
                                 <div class="col">
                                     <input type="password" name="password_confirmation" id="email_confirmation"
                                         class="form-control @error('password_confirmation') is-invalid @enderror"
-                                        placeholder="********">
+                                        placeholder="********" {{ !isset($user) ? 'required' : '' }}>
                                     @error('password_confirmation')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -128,7 +118,7 @@
                                 <div class="col">
                                     <select name="role" id="role" class="form-control js-example-basic-single">
                                         @foreach ($roles as $key => $role)
-                                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                            <option value="{{ $role->id }}" @isset($user) {{ $user->role->id == $role->id ? 'selected' : '' }} @endisset>{{ $role->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('role')
@@ -141,7 +131,7 @@
                                 <label class="form-label @error('avatar') text-danger @enderror">Avatar</label>
                                 <div class="col">
                                     <input type="file" name="avatar" id="avatar"
-                                        class="dropify @error('avatar') is-invalid @enderror">
+                                        class="dropify @error('avatar') is-invalid @enderror" data-default-file="{{ isset($user) ? $user->getFirstMediaUrl('avatar') : '' }}">
                                     @error('avatar')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -150,7 +140,7 @@
 
                             <div class="form-group mb-3 ">
                                 <label class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="status" name="status">
+                                    <input class="form-check-input" type="checkbox" id="status" name="status" @isset($user) {{ $user->status == true ? 'checked' : '' }} @endisset>
                                     <span class="form-check-label">Status</span>
                                 </label>
                                 @error('avatar')

@@ -4,8 +4,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <a href="." class="navbar-brand navbar-brand-autodark">
-            <img src="" width="110" height="32" alt="Tabler"
-                class="navbar-brand-image">
+            <img src="" width="110" height="32" alt="Tabler" class="navbar-brand-image">
         </a>
         <div class="navbar-nav flex-row d-lg-none">
             <div class="nav-item dropdown d-none d-md-flex mr-3">
@@ -95,7 +94,8 @@
                 </li> --}}
 
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('app/dashboard*') ? 'active' : '' }}" href="{{ route('app.dashboard') }}">
+                    <a class="nav-link {{ Request::is('app/dashboard*') ? 'active' : '' }}"
+                        href="{{ route('app.dashboard') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -112,16 +112,18 @@
                     </a>
                 </li>
 
+                @can('app.roles.index')
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('app/roles*') ? 'active' : '' }}" href="{{ route('app.roles.index') }}">
+                    <a class="nav-link {{ Request::is('app/roles*') ? 'active' : '' }}"
+                        href="{{ route('app.roles.index') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block"><svg xmlns="http://www.w3.org/2000/svg"
                                 class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                                 stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <circle cx="9" cy="7" r="4" />
-                                <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                                <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
+                                <circle cx="8" cy="15" r="4" />
+                                <line x1="10.85" y1="12.15" x2="19" y2="4" />
+                                <line x1="18" y1="5" x2="20" y2="7" />
+                                <line x1="15" y1="8" x2="17" y2="10" />
                             </svg>
                         </span>
                         <span class="nav-link-title">
@@ -129,9 +131,12 @@
                         </span>
                     </a>
                 </li>
+                @endcan
 
+                @can('app.users.index')
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('app/users*') ? 'active' : '' }}" href="{{ route('app.users.index') }}">
+                    <a class="nav-link {{ Request::is('app/users*') ? 'active' : '' }}"
+                        href="{{ route('app.users.index') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block"><svg xmlns="http://www.w3.org/2000/svg"
                                 class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                                 stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -147,6 +152,27 @@
                         </span>
                     </a>
                 </li>
+                @endcan
+                
+                @can('app.backups.index')
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('app/backups*') ? 'active' : '' }}"
+                        href="{{ route('app.backups.index') }}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block"><svg xmlns="http://www.w3.org/2000/svg"
+                                class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <ellipse cx="12" cy="6" rx="8" ry="3"></ellipse>
+                                <path d="M4 6v6a8 3 0 0 0 16 0v-6" />
+                                <path d="M4 12v6a8 3 0 0 0 16 0v-6" />
+                            </svg>
+                        </span>
+                        <span class="nav-link-title">
+                            Backups
+                        </span>
+                    </a>
+                </li>
+                @endcan
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#navbar-base" data-toggle="dropdown" role="button"
