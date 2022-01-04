@@ -18,9 +18,7 @@
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-card">
                     <div class="card">
                         <div class="card-body">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad amet consectetur
-                            exercitationem fugiat in ipsa ipsum, natus odio quidem quod repudiandae sapiente. Amet
-                            debitis et magni maxime necessitatibus ullam.
+                            No new Notification
                         </div>
                     </div>
                 </div>
@@ -36,16 +34,16 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                    <a href="{{ route('app.profile.index') }}" class="dropdown-item">Profil dan Akun</a>
-                    <a href="{{ route('app.profile.password.change') }}" class="dropdown-item">Change Password</span></a>
-                    <a href="#" class="dropdown-item">Pengaturan</a>
+                    @can('app.profile.update') <a href="{{ route('app.profile.index') }}" class="dropdown-item">Profil dan Akun</a> @endcan
+                    @can('app.profile.password') <a href="{{ route('app.profile.password.change') }}" class="dropdown-item">Change Password</span></a> @endcan
+                    @can('app.settings.index') <a href="{{ route('app.settings.general') }}" class="dropdown-item">Pengaturan</a> @endcan
                     <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-logout">Keluar</a>
                 </div>
             </div>
         </div>
         <div class="collapse navbar-collapse" id="navbar-menu">
             <div>
-                <form action="." method="get">
+                {{-- <form action="." method="get">
                     <div class="input-icon">
                         <span class="input-icon-addon">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -57,7 +55,7 @@
                         </span>
                         <input type="text" class="form-control" placeholder="Pencarian...">
                     </div>
-                </form>
+                </form> --}}
             </div>
         </div>
     </div>

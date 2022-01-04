@@ -7,14 +7,14 @@
             <div class=""></div>
             <div class="name">
                 <h2 class="page-title">
-                    Backup
+                    Backups
                 </h2>
                 <!-- Page pre-title -->
                 {{-- <div class="page-pretitle">
                     Sabtu, 4 Desember 2021 11:36 PM
                 </div> --}}
                 <div class="page-pretitle">
-                    <a href="#">Beranda</a> / Backups
+                    <a href="{{ route('app.dashboard') }}">Dashboard</a> / Backups
                 </div>
             </div>
         </div>
@@ -27,6 +27,7 @@
                         Tambah Donasi
                     </a>
                 </span> --}}
+                @can('app.backups.destroy')
                 <button type="button" class="btn btn-danger d-none d-sm-inline-block"
                     onclick="event.preventDefault(); document.getElementById('clan-backup-form').submit();">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
@@ -46,7 +47,9 @@
                     @csrf
                     @method('DELETE')
                 </form>
+                @endcan
 
+                @can('app.backups.create')
                 <button type="button" class="btn btn-primary d-none d-sm-inline-block"
                     onclick="event.preventDefault(); document.getElementById('new-backup-form').submit();">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
@@ -63,7 +66,8 @@
                     style="display: none">
                     @csrf
                 </form>
-                <a href="#" class="btn btn-primary d-sm-none btn-icon" data-toggle="modal" data-target="#modal-report"
+                @endcan
+                {{-- <a href="#" class="btn btn-primary d-sm-none btn-icon" data-toggle="modal" data-target="#modal-report"
                     aria-label="Create new report">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                         stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -72,7 +76,7 @@
                         <line x1="12" y1="5" x2="12" y2="19" />
                         <line x1="5" y1="12" x2="19" y2="12" />
                     </svg>
-                </a>
+                </a> --}}
             </div>
         </div>
     </div>
@@ -102,6 +106,7 @@
                             <td class="text-center">{{ $backup['file_size'] }}</td>
                             <td class="text-center">{{ $backup['created_at'] }}</td>
                             <td class="text-center">
+                                @can('app.backups.download')
                                 <a href="{{ route('app.backups.download', $backup['file_name']) }}"
                                     class="btn btn-info btn-sm">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -114,6 +119,9 @@
                                     </svg>
                                     Download
                                 </a>
+                                @endcan
+
+                                @can('app.backups.destroy')
                                 <button class="btn btn-danger btn-sm" onclick="deleteData({{ $key }})">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -133,6 +141,7 @@
                                     @csrf
                                     @method('DELETE')
                                 </form>
+                                @endcan
                             </td>
                         </tr>
                         @endforeach

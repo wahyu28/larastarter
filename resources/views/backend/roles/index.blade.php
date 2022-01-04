@@ -14,7 +14,7 @@
                     Sabtu, 4 Desember 2021 11:36 PM
                 </div> --}}
                 <div class="page-pretitle">
-                    <a href="#">Beranda</a> / Roles
+                    <a href="{{ route('app.dashboard') }}">Dashboard</a> / Roles
                 </div>
             </div>
         </div>
@@ -27,21 +27,13 @@
                         Tambah Donasi
                     </a>
                 </span> --}}
+                @can('app.roles.create')
                 <a href="{{ route('app.roles.create') }}" class="btn btn-primary d-none d-sm-inline-block">
-                    <!-- Download SVG icon from http://tabler-icons.io/i/report-analytics -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-                        stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
-                        <rect x="9" y="3" width="6" height="4" rx="2" />
-                        <path d="M9 17v-5" />
-                        <path d="M12 17v-1" />
-                        <path d="M15 17v-3" />
-                    </svg>
-                    Tambah Role
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="9" /><line x1="9" y1="12" x2="15" y2="12" /><line x1="12" y1="9" x2="12" y2="15" /></svg>
+                    Create New Role
                 </a>
-                <a href="#" class="btn btn-primary d-sm-none btn-icon" data-toggle="modal" data-target="#modal-report"
+                @endcan
+                {{-- <a href="#" class="btn btn-primary d-sm-none btn-icon" data-toggle="modal" data-target="#modal-report"
                     aria-label="Create new report">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                         stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -50,7 +42,7 @@
                         <line x1="12" y1="5" x2="12" y2="19" />
                         <line x1="5" y1="12" x2="19" y2="12" />
                     </svg>
-                </a>
+                </a> --}}
             </div>
         </div>
     </div>
@@ -86,12 +78,16 @@
                                     {{ $role->created_at->diffForHumans() }}
                                 </td>
                                 <td class="text-center">
+                                    @can('app.roles.edit')
                                     <a href="{{ route('app.roles.edit', $role->id) }}" class="btn btn-info btn-sm">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" /><path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" /><line x1="16" y1="5" x2="19" y2="8" />
                                         </svg>
                                         Edit
                                     </a>
+                                    @endcan
+
+                                    @can('app.roles.destroy')
                                     @if ($role->deleteable == true)
                                     <button class="btn btn-danger btn-sm" onclick="deleteData({{ $role->id }})">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="4" y1="7" x2="20" y2="7" /><line x1="10" y1="11" x2="10" y2="17" /><line x1="14" y1="11" x2="14" y2="17" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>    
@@ -102,6 +98,7 @@
                                         @method('DELETE')
                                     </form> 
                                     @endif
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach

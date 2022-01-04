@@ -17,6 +17,11 @@
     {{-- <link href="{{ asset('backend/dist/css/tabler-vendors.min.css') }}" rel="stylesheet" /> --}}
     {{-- <link href="{{ asset('backend/dist/css/demo.min.css') }}" rel="stylesheet" /> --}}
     {{-- <link rel="stylesheet" href="{{ asset('backend/css/toastr.min.css') }}"> --}}
+	<style>
+		.content {
+			/* background-color: #eeeeee !important; */
+		}
+	</style>
 	@stack('css')
 </head>
 <body class="antialiased">

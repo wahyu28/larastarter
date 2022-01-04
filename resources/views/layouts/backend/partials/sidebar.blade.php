@@ -4,7 +4,8 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <a href="." class="navbar-brand navbar-brand-autodark">
-            <img src="" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+            {{-- <img src="" width="110" height="32" alt="Tabler" class="navbar-brand-image"> --}}
+            {{ setting('site_title') }}
         </a>
         <div class="navbar-nav flex-row d-lg-none">
             <div class="nav-item dropdown d-none d-md-flex mr-3">
@@ -93,6 +94,7 @@
                     </div>
                 </li> --}}
 
+                @can('app.dashboard')
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('app/dashboard*') ? 'active' : '' }}"
                         href="{{ route('app.dashboard') }}">
@@ -111,6 +113,7 @@
                         </span>
                     </a>
                 </li>
+                @endcan
 
                 @can('app.roles.index')
                 <li class="nav-item">
@@ -127,7 +130,7 @@
                             </svg>
                         </span>
                         <span class="nav-link-title">
-                            Roles
+                            Roles Permissions
                         </span>
                     </a>
                 </li>
@@ -153,19 +156,12 @@
                     </a>
                 </li>
                 @endcan
-                
+
                 @can('app.backups.index')
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('app/backups*') ? 'active' : '' }}"
                         href="{{ route('app.backups.index') }}">
-                        <span class="nav-link-icon d-md-none d-lg-inline-block"><svg xmlns="http://www.w3.org/2000/svg"
-                                class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <ellipse cx="12" cy="6" rx="8" ry="3"></ellipse>
-                                <path d="M4 6v6a8 3 0 0 0 16 0v-6" />
-                                <path d="M4 12v6a8 3 0 0 0 16 0v-6" />
-                            </svg>
+                        <span class="nav-link-icon d-md-none d-lg-inline-block"><svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 18a4.6 4.4 0 0 1 0 -9a5 4.5 0 0 1 11 2h1a3.5 3.5 0 0 1 0 7h-12" /></svg>
                         </span>
                         <span class="nav-link-title">
                             Backups
@@ -174,7 +170,27 @@
                 </li>
                 @endcan
 
-                <li class="nav-item dropdown">
+                @can('app.settings.index')
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('app/settings*') ? 'active' : '' }}"
+                        href="{{ route('app.settings.general') }}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block"><svg xmlns="http://www.w3.org/2000/svg"
+                                class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path
+                                    d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </span>
+                        <span class="nav-link-title">
+                            Settings
+                        </span>
+                    </a>
+                </li>
+                @endcan
+
+                {{-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#navbar-base" data-toggle="dropdown" role="button"
                         aria-expanded="false">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -206,43 +222,9 @@
                             </div>
                         </div>
                     </div>
-                </li>
+                </li> --}}
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#navbar-base" data-toggle="dropdown" role="button"
-                        aria-expanded="false">
-                        <span class="nav-link-icon d-md-none d-lg-inline-block">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path
-                                    d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
-                                <circle cx="12" cy="12" r="3" />
-                            </svg>
-                        </span>
-                        <span class="nav-link-title">
-                            Pengaturan
-                        </span>
-                    </a>
-                    <div class="dropdown-menu">
-                        <div class="dropdown-menu-columns">
-                            <div class="dropdown-menu-column">
-                                {{-- <a class="dropdown-item" href="{{ route('user.index') }}">
-                                    Pengguna
-                                </a> --}}
-                                <a class="dropdown-item" href="#">
-                                    Pengaturan Aplikasi
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    Kantor Layanan Donasi
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" href="/user-activity">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -256,7 +238,7 @@
                             Log Aktifitas
                         </span>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>

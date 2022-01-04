@@ -14,7 +14,7 @@
                     Sabtu, 4 Desember 2021 11:36 PM
                 </div> --}}
                 <div class="page-pretitle">
-                    <a href="#">Beranda</a> / Users
+                    <a href="{{ route('app.dashboard') }}">Dashboard</a> / Users
                 </div>
             </div>
         </div>
@@ -28,20 +28,10 @@
                     </a>
                 </span> --}}
                 <a href="{{ route('app.users.create') }}" class="btn btn-primary d-none d-sm-inline-block">
-                    <!-- Download SVG icon from http://tabler-icons.io/i/report-analytics -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-                        stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
-                        <rect x="9" y="3" width="6" height="4" rx="2" />
-                        <path d="M9 17v-5" />
-                        <path d="M12 17v-1" />
-                        <path d="M15 17v-3" />
-                    </svg>
-                    Tambah User
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="9" /><line x1="9" y1="12" x2="15" y2="12" /><line x1="12" y1="9" x2="12" y2="15" /></svg>
+                    Create New User
                 </a>
-                <a href="#" class="btn btn-primary d-sm-none btn-icon" data-toggle="modal" data-target="#modal-report"
+                {{-- <a href="#" class="btn btn-primary d-sm-none btn-icon" data-toggle="modal" data-target="#modal-report"
                     aria-label="Create new report">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                         stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -49,7 +39,7 @@
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <line x1="12" y1="5" x2="12" y2="19" />
                         <line x1="5" y1="12" x2="19" y2="12" />
-                    </svg>
+                    </svg> --}}
                 </a>
             </div>
         </div>
@@ -104,6 +94,7 @@
                             </td>
                             <td class="text-center">{{ $user->created_at->diffForHumans() }}</td>
                             <td class="text-center">
+                                @can('app.users.index')
                                 <a class="btn btn-secondary btn-sm" href="{{ route('app.users.show',$user->id) }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -115,6 +106,7 @@
                                     </svg>
                                     <span>Show</span>
                                 </a>
+                                @endcan
                                 @can('app.users.edit')
                                 <a class="btn btn-info btn-sm" href="{{ route('app.users.edit',$user->id) }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"

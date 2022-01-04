@@ -7,11 +7,11 @@
             <div class=""></div>
             <div class="name">
                 <h2 class="page-title">
-                    Roles
+                    {{ __((isset($role) ? 'Edit ' : 'Create New') . ' Role') }}
                 </h2>
                 <div class="page-pretitle">
                     <a href="{{ route('app.dashboard') }}">Beranda</a> / <a
-                        href="{{ route('app.roles.index') }}">Roles</a>
+                        href="{{ route('app.roles.index') }}">Roles</a> / {{ __((isset($role) ? 'Edit' : 'Create')) }}
                 </div>
             </div>
         </div>
@@ -23,18 +23,8 @@
                         Tambah Donasi
                     </a>
                 </span> --}}
-                <a href="{{ route('app.roles.index') }}" class="btn btn-primary d-none d-sm-inline-block">
-                    <!-- Download SVG icon from http://tabler-icons.io/i/report-analytics -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-                        stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
-                        <rect x="9" y="3" width="6" height="4" rx="2" />
-                        <path d="M9 17v-5" />
-                        <path d="M12 17v-1" />
-                        <path d="M15 17v-3" />
-                    </svg>
+                <a href="{{ route('app.roles.index') }}" class="btn btn-danger d-none d-sm-inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20 6a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-11l-5 -5a1.5 1.5 0 0 1 0 -2l5 -5Z" /><path d="M12 10l4 4m0 -4l-4 4" /></svg>
                     Back to List
                 </a>
                 <a href="#" class="btn btn-primary d-sm-none btn-icon" data-toggle="modal" data-target="#modal-report"
@@ -66,7 +56,7 @@
                             @isset($role)
                             Edit Role
                             @else
-                            Create Donasi
+                            Create New Role
                             @endisset
                         </div>
                     </h3>
@@ -104,7 +94,7 @@
                                 </label>
                             </div>
 
-                            @forelse ($modules->chunk(2) as $key => $chunks)
+                            @forelse ($modules->chunk(3) as $key => $chunks)
                             <div class="row">
                                 @foreach ($chunks as $key => $module)
                                 <div class="col">
@@ -135,11 +125,19 @@
                                 </div>
                             </div>
                             @endforelse
-                            @isset($role)
-                            <button type="submit" class="btn btn-primary">Update</button>    
-                            @else
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                            @endisset
+                            <div class="col-md-12 text-right">
+                                @isset($role)
+                                <button type="submit" class="btn btn-primary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
+                                    Update Role
+                                </button>    
+                                @else
+                                <button type="submit" class="btn btn-primary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" /><circle cx="12" cy="14" r="2" /><polyline points="14 4 14 8 8 8 8 4" /></svg>
+                                    Save Role
+                                </button>
+                                @endisset
+                            </div>
                         </div>
                     </div>
                 </div>
